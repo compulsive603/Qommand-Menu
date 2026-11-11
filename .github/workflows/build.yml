@@ -22,12 +22,15 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
+        with:
+          build-root-directory: commandmenu
 
       - name: Build Mod with Installed Gradle
         run: gradle build
+        working-directory: commandmenu
 
       - name: Upload Compiled Jar Artifact
         uses: actions/upload-artifact@v4
         with:
           name: commandmenu-mod-1.20.1
-          path: build/libs/*.jar
+          path: commandmenu/build/libs/*.jar
