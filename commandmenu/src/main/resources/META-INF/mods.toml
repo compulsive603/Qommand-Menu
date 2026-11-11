@@ -1,0 +1,10 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="commandmenu"
+version="1.0.0"
+displayName="Command Menu"
+description="Opens an in-game menu displaying all Vanilla and modded commands with search and sorting."
+authors="Developer"
