@@ -23,11 +23,25 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      # Installs Gradle 8.5 on the runner, so the build works even if gradlew was not committed
       - name: Set up Gradle (with caching)
         uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.5
+
+      - name: Check project files
+        run: |
+          ls -la
+          test -f build.gradle || { echo "::error::build.gradle not found in repo root. Commit the contents of the commandlist folder, not the folder itself."; exit 1; }
 
       - name: Build
-        run: ./gradlew build --no-daemon
+        run: |
+          if [ -f gradlew ]; then
+            chmod +x gradlew
+            ./gradlew build --no-daemon
+          else
+            gradle build --no-daemon
+          fi
 
       - name: Upload jar
         uses: actions/upload-artifact@v4
@@ -43,3 +57,4 @@ jobs:
         with:
           files: build/libs/*.jar
           generate_release_notes: true
+
