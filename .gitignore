@@ -9,3 +9,6 @@ out/
 .settings/
 bin/
 eclipse/
+
+# keep the Gradle wrapper jar even if a global gitignore excludes *.jar
+!gradle/wrapper/gradle-wrapper.jar
